@@ -73,7 +73,7 @@ void    *blockstorechunk(t_block *block, int size)
 
   nbchunk = chunk_count(block->child);
   chunk = (t_chunk*)(block + sizeof(t_block) + nbchunk * sizeof(t_chunk));
-  ptr = (void*)(block + sizeof(t_block) + (100 * sizeof(t_chunk)) + nbchunk * size);
+  ptr =      (void*)(block + sizeof(t_block) + (100 * sizeof(t_chunk)) + nbchunk * size);
   chunk->size = size;
   chunk->ptr = ptr;
 
@@ -122,21 +122,28 @@ void *searchmapfor(int size)
   bool    blockfound;
 
   blockfound = false;
+  //CREATE OR GET BLOCKS
   if(!(blocks = blocksmanager(NULL)))
-  {
     blocks = blocksmanager(getnewblock(size * 100, size));
-  }
+
+  //If can store in
+  if (blockcanstore(blocks, size))
+    return (blockstorechunk(blocks,size));
+
   currentblock = blocks;
-  while (currentblock && !blockfound)
+  while (currentblock->next && !blockfound)
   {
-    blockfound = blockcanstore(currentblock, size);
-    if (blockfound)
-      blockavailable = currentblock;
     currentblock = currentblock->next;
+    blockfound = blockcanstore(currentblock, size);
   }
   if (blockfound)
-    return (blockstorechunk(blockavailable,size));
+    return (blockstorechunk(currentblock,size));
   else
+  {
+    currentblock->next = getnewblock(size * 100, size);
+    if (blockcanstore(currentblock->next, size))
+      return (blockstorechunk(currentblock->next,size));
+  }
 
   return (NULL);
 }
@@ -166,13 +173,19 @@ void show_alloc_mem()
 {
   t_block *blocks;
   t_block *current;
+  t_chunk *chunk;
 
   blocks = blocksmanager(NULL);
   current = blocks;
-
   while (current)
   {
-    printf("block->type:%d", blocks->type);
+    printf("\nblock:%d addr:%p s:%d ===================%#x================\n", current->type, current, sizeof(t_block), current->size);
+    chunk = current->child;
+    while(chunk)
+    {
+      printf("struct chunk  p:%p s:%d \n   Zone memoire:%p s:%d\n", chunk, sizeof(t_chunk), chunk->ptr, chunk->size);
+      chunk = chunk->next;
+    }
     current = current->next;
   }
 }
@@ -194,43 +207,35 @@ void show_alloc_mem()
 
 int main(void)
 {
-  void *toto;
-  char *tata;
-
   char *test;
 
-  toto = mmap(0, getpagesize() , PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1,0);
-  if (toto == MAP_FAILED)
-  {
-    perror("mmap");
-    return (1);
-  }
 
-  printf("%p getpagesize:%d\n", toto, getpagesize());
-  tata = (char*)toto;
-  bzero(tata, 10);
-  tata[0] = 'a';
-
-  printf("%c", tata[0]);
-
-
-  test = (char*)ft_malloc(10);
+  test = (char*)ft_malloc(2500);
+  printf(" [ %p ] ", test);
   bzero(test, 10);
-  test[0] = 'u';
-
+  strcpy(test,"HelloWorld    3 SMALL\n");
   printf("%s\n", test);
 
 
-  test = (char*)ft_malloc(10);
+  test = (char*)ft_malloc(2500);
+  printf(" [ %p ] ", test);
   bzero(test, 10);
-  test[0] = '5';
+  strcpy(test,"HelloWorld    5 SMALL\n");
   printf("%s\n", test);
 
-  test = (char*)ft_malloc(2000);
+
+  test = (char*)ft_malloc(2500);
+  printf(" [ %p ] ", test);
   bzero(test, 10);
-  test[0] = '5';
+  strcpy(test,"HelloWorld    3 SMALL\n");
   printf("%s\n", test);
 
+
+  test = (char*)ft_malloc(2500);
+  printf(" [ %p ] ", test);
+  bzero(test, 10);
+  strcpy(test,"HelloWorld    5 SMALL\n");
+  printf("%s\n", test);
 
   show_alloc_mem();
   //while(42);
