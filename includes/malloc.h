@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:25:23 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/20 00:36:56 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/21 10:10:27 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum { false, true } bool;
 #define TINY 1025
 #define SMALL 5000 //GETPAGESIZE
 
-#define BLOCK_MAX 200
+#define BLOCK_MAX 100
 
 typedef struct    s_block
 {
@@ -68,6 +68,7 @@ void  *getmapavailable(t_map *maps, size_t size);
 
 size_t mapsize(size_t size);
 size_t sizetype(size_t size);
+size_t	multiplepagesize(size_t size);
 
 void *realloc(void *ptr, size_t size);
 

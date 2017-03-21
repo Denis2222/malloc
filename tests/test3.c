@@ -6,7 +6,7 @@
 /*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 14:26:13 by jguyet            #+#    #+#             */
-/*   Updated: 2017/03/20 00:45:42 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/21 10:44:14 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int		main(void)
 
 	addr1 = malloc(10);
 	free(addr1);
+
+
+	addr3 = malloc(30);
+addr3 = malloc(30);
+addr3 = malloc(30);
+addr3 = malloc(-2);
 	show_alloc_mem();
 	return (0);
 }

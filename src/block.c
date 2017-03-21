@@ -6,13 +6,13 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:22:14 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/19 22:55:51 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/21 12:54:41 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_block *getblockptrbyid(t_map *map, int id)
+t_block   *getblockptrbyid(t_map *map, int id)
 {
   if (map->type == TINY)
   {
@@ -26,7 +26,7 @@ t_block *getblockptrbyid(t_map *map, int id)
     return ((t_block*)(map->ptr + SIZEMAP + SIZEBLOCK));
 }
 
-t_block *getblockbyid(t_map *map, int id)
+t_block     *getblockbyid(t_map *map, int id)
 {
   if (map->type == TINY)
     return (t_block*)(map->ptr + sizeof(t_map) + (sizeof(t_block) * id));
@@ -36,7 +36,7 @@ t_block *getblockbyid(t_map *map, int id)
     return ((t_block*)(map->ptr + SIZEMAP));
 }
 
-void initblockmap(t_map *map)
+void      initblockmap(t_map *map)
 {
   int id;
   t_block *block;
@@ -54,7 +54,7 @@ void initblockmap(t_map *map)
   }
 }
 
-t_block *findemptyblock(t_map *map)
+t_block    *findemptyblock(t_map *map)
 {
   t_block *block;
   int id;
@@ -70,16 +70,21 @@ t_block *findemptyblock(t_map *map)
   return (NULL);
 }
 
-t_map *findmapwithblock(t_map *globalmap, void*ptr)
+t_map      *findmapwithblock(t_map *globalmap, void*ptr)
 {
-  t_map *map;
+	t_map	*map;
+	t_map	*found;
 
-  map = globalmap;
-  while (map)
-  {
-    if ((ptr > map->ptr) && (ptr < (map->ptr + map->total)))
-      break;
-    map = map->next;
-  }
-  return (map);
+	found = NULL;
+	map = globalmap;
+	while (map)
+	{
+		if ((ptr > map->ptr) && (ptr < (map->ptr + map->total)))
+		{
+			found = map;
+			break;
+		}
+		map = map->next;
+	}
+	return (found);
 }

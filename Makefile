@@ -6,7 +6,7 @@
 #    By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/19 15:18:49 by dmoureu-          #+#    #+#              #
-#    Updated: 2017/03/20 00:24:00 by dmoureu-         ###   ########.fr        #
+#    Updated: 2017/03/20 20:37:41 by dmoureu-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,31 +15,18 @@ ifeq ($(HOSTTYPE),)
 endif
 
 EXTENSION	=	.so
-
 SPACE		=	_
-
 NAMESTD		=	libft_malloc
-
 NAME		=	$(addprefix $(addprefix $(addprefix $(NAMESTD), $(SPACE)), $(HOSTTYPE)), $(EXTENSION))
-
 NAMELINK	=	$(addprefix $(NAMESTD), $(EXTENSION))
-
 NAMEBASE    =   $(shell basename $(NAME))
-
 LENGTHNAME	=	`printf "%s" $(NAMEBASE) | wc -c`
-
 MAX_COLS	=	$$(echo "$$(tput cols)-20-$(LENGTHNAME)"|bc)
-
 CC			=	gcc
-
 FLAGS		=	-fPIC -W -Wall -Wextra -Werror -g3
-
 SRCDIR		=	src/
-
 OBJDIR		=	.obj/
-
 INCDIR		=	includes/
-
 SRCBASE		=	\
 				malloc.c \
 				block.c \
@@ -47,13 +34,10 @@ SRCBASE		=	\
 				map.c \
 				show_alloc.c \
 				size.c \
-				realloc.c \
-				print_memory.c
+				realloc.c
 
 LIBFT = ./libft/libft.a
-
 SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
-
 OBJS		=	$(addprefix $(OBJDIR), $(SRCBASE:.c=.o))
 
 .SILENT:
