@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 12:29:11 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 14:20:27 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	getmapwords(t_map *map)
 	char	keyword[10];
 
 	if (map->type <= TINY)
-		strcpy(keyword, "TINY");
+		ft_strcpy(keyword, "TINY");
 	else if (map->type <= SMALL)
-		strcpy(keyword, "SMALL");
+		ft_strcpy(keyword, "SMALL");
 	else if (map->type >= SMALL)
-		strcpy(keyword, "LARGE");
+		ft_strcpy(keyword, "LARGE");
 	if (map->type > SMALL)
 		ft_printf("%s : %p (use:%d)\n",
 					keyword, map, !map->available);

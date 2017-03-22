@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:18:17 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 12:27:07 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 22:16:34 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	*malloc(size_t size)
 {
+	ft_putstr("M");
 	return (getmemory(size));
 }
 

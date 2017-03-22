@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:22:56 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 13:47:21 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 14:24:44 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	free(void *ptrblock)
 	t_block	*block;
 	int		id;
 
+	ft_putstr("F");
 	if (ptrblock == NULL)
 		return ;
 	globalmap = staticmaps(NULL);

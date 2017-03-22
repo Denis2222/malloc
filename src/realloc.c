@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 17:40:37 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 10:13:42 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 22:19:36 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	*realloc(void *ptr, size_t size)
 	int		id;
 
 	if (size == 0 && ptr)
+	{
+		//free(ptr);
 		return (malloc(1024));
+	}
 	if (!ptr)
 		return (malloc(size));
 	globalmap = staticmaps(NULL);
