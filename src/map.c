@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:20:49 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/21 10:41:44 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 11:53:25 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ t_map	*staticmaps(t_map *first)
 	static t_map	*maps = NULL;
 
 	if (first != NULL)
+	{
+		pthread_mutex_init(&g_lock, NULL);
 		maps = first;
+	}
 	return (maps);
 }
 
@@ -26,6 +29,8 @@ t_map	*newmap(size_t size)
 	t_map	*map;
 	void	*ptrmmap;
 
+	//printf("newmap(%lu)\n", size);
+	//ft_putstr("newmap(");ft_putnbr(size);ft_putstr(")\n");
 	ptrmmap = mmap(0, multiplepagesize(mapsize(size)),
 		PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	map = (t_map*)ptrmmap;
@@ -37,26 +42,21 @@ t_map	*newmap(size_t size)
 	map->total = mapsize(size);
 	map->type = sizetype(size);
 	map->next = NULL;
-	map->empty = BLOCK_MAX;
+	if (map->type <= SMALL)
+		map->available = BLOCK_MAX;
+	else
+		map->available = 1;
 	initblockmap(map);
-	map->firstblock = getblockbyid(map, 0);
-	map->emptyblock = getblockbyid(map, 0);
 	return (map);
 }
 
 bool	mapcanstore(t_map *map, size_t size)
 {
-	if (map->type == sizetype(size) && map->type <= SMALL)
-	{
-		if (map->empty > 0)
-			return (1);
-		else
-			return (0);
-	}
+	if (map->type == sizetype(size) && map->available > 0)
+		return (1);
 	else
 		return (0);
 }
-
 
 void	*mapstore(t_map *map, size_t size)
 {
@@ -66,7 +66,7 @@ void	*mapstore(t_map *map, size_t size)
 	block = findemptyblock(map);
 	block->content = size;
 	ptr = getblockptrbyid(map, block->id);
-	map->empty--;
+	map->available--;
 	return (ptr);
 }
 

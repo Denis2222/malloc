@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:18:17 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/21 12:29:56 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 12:27:07 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	*malloc(size_t size)
 {
-	write(1, "MAL", 3);
 	return (getmemory(size));
 }
 
@@ -28,7 +27,9 @@ void	*getmemory(size_t size)
 	{
 		maps = staticmaps(newmap(size));
 	}
+	pthread_mutex_lock(&g_lock);
 	mapavailable = getmapavailable(maps, size);
 	ptr = mapstore(mapavailable, size);
+	pthread_mutex_unlock(&g_lock);
 	return (ptr);
 }

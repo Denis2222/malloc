@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:26:38 by jguyet            #+#    #+#             */
-/*   Updated: 2017/02/20 14:26:39 by jguyet           ###   ########.fr       */
+/*   Created: 2017/03/22 09:01:31 by dmoureu-          #+#    #+#             */
+/*   Updated: 2017/03/22 14:00:22 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-void	print(char *s)
+void print(char *s)
 {
-	write(1, s, strlen(s));
+	write(1, s, strlen(s)); 
 }
 
-int		main(void)
+int main()
 {
-	char	*addr;
+	char *addr;
 
-	addr = (char *)malloc(16);
+	addr = malloc(16);
 	free(NULL);
 	free((void *)addr + 5);
 	if (realloc((void *)addr + 5, 10) == NULL)
-		print("Bonjours\n");
-	return (0);
+	print("Bonjours\n");
 }

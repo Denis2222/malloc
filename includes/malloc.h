@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:25:23 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/21 10:10:27 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 10:07:34 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <sys/mman.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+#include <pthread.h>
+
 #include "../libft/libft.h"
 
 typedef enum { false, true } bool;
@@ -36,14 +38,14 @@ typedef struct    s_map
   void            *ptr;
   size_t          total;
   size_t          type;
-  int             empty;
+  int             available;
   struct s_map    *next;
-  t_block         *firstblock;
-  t_block         *emptyblock;
 }                 t_map;
 
 #define SIZEBLOCK sizeof(t_block)
 #define SIZEMAP sizeof(t_map)
+
+pthread_mutex_t	g_lock;
 
 t_block *getblockptrbyid(t_map *map, int id);
 t_block *getblockbyid(t_map *map, int id);

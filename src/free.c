@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:22:56 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/21 12:30:11 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 13:47:21 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,24 @@
 
 int		freemap(t_map *cmap, t_map *prev)
 {
-  if (prev)
-  {
-    if (cmap->empty == BLOCK_MAX)
-    {
-      prev->next = cmap->next;
-      munmap(cmap->ptr, cmap->type);
-      return (1);
-    }
-  }
+	if (prev)
+	{
+		if (cmap->available == BLOCK_MAX || (cmap->type > SMALL && cmap->available == 1))
+		{
+			prev->next = cmap->next;
+			munmap(cmap->ptr, cmap->type);
+			return (1);
+		}
+	}
+	else
+	{
+		if (cmap->type > SMALL && cmap->available == 1)
+		{
+			staticmaps(cmap->next);
+			munmap(cmap->ptr, cmap->type);
+			return (1);
+		}
+	}
   return (0);
 }
 
@@ -67,7 +76,7 @@ void	freeemptymap(t_map *gmap)
 void	freemyblock(t_map *map, t_block *block)
 {
 	block->content = 0;
-	map->empty++;
+	map->available++;
 }
 
 void	free(void *ptrblock)
@@ -77,7 +86,6 @@ void	free(void *ptrblock)
 	t_block	*block;
 	int		id;
 
-	write(1, "FRE", 3);
 	if (ptrblock == NULL)
 		return ;
 	globalmap = staticmaps(NULL);

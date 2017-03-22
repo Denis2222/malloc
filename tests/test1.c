@@ -3,37 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   test1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/20 14:25:51 by jguyet            #+#    #+#             */
-/*   Updated: 2017/03/21 11:25:13 by dmoureu-         ###   ########.fr       */
+/*   Created: 2017/03/22 09:01:11 by dmoureu-          #+#    #+#             */
+/*   Updated: 2017/03/22 13:50:50 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int		main(void)
+int main()
 {
-	int		i;
-	char	*addr;
+	int i;
+	char *addr;
 
 	i = 0;
-	while (i < 10)
+	while (i < 1024)
 	{
-		addr = (char *)malloc(10);
+		addr = (char*)malloc(1024);
 		addr[0] = 42;
 		i++;
 	}
-
-	show_alloc_mem();
-
-	i = 0;
-	while (i < 10)
-	{
-		free(addr);
-		i++;
-	}
-	show_alloc_mem();
-
 	return (0);
 }

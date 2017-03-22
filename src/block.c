@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:22:14 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/21 12:54:41 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 09:11:47 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,25 @@
 t_block   *getblockptrbyid(t_map *map, int id)
 {
   if (map->type == TINY)
-  {
     return (t_block*)(map->ptr + SIZEMAP + (SIZEBLOCK * BLOCK_MAX) + (TINY * id));
-  }
   else if(map->type == SMALL)
-  {
     return (t_block*)(map->ptr + SIZEMAP + (SIZEBLOCK * BLOCK_MAX) + (SMALL * id));
-  }
   else
     return ((t_block*)(map->ptr + SIZEMAP + SIZEBLOCK));
 }
 
 t_block     *getblockbyid(t_map *map, int id)
 {
-  if (map->type == TINY)
-    return (t_block*)(map->ptr + sizeof(t_map) + (sizeof(t_block) * id));
-  else if(map->type == SMALL)
-    return (t_block*)(map->ptr + SIZEMAP + SIZEBLOCK * id);
+  if (map->type == TINY || map->type == SMALL)
+    return (t_block*)(map->ptr + SIZEMAP + (SIZEBLOCK * id));
   else
     return ((t_block*)(map->ptr + SIZEMAP));
 }
 
 void      initblockmap(t_map *map)
 {
-  int id;
-  t_block *block;
+  int		id;
+  t_block	*block;
 
   id = 0;
   while (id < BLOCK_MAX)

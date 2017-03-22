@@ -6,7 +6,7 @@
 #    By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/19 15:18:49 by dmoureu-          #+#    #+#              #
-#    Updated: 2017/03/20 20:37:41 by dmoureu-         ###   ########.fr        #
+#    Updated: 2017/03/22 13:54:19 by dmoureu-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,8 +85,8 @@ test:
 	gcc -o test0 tests/test0.c -I includes/ -L . -lft_malloc
 	gcc -o test1 tests/test1.c -I includes/ -L . -lft_malloc
 	gcc -o test2 tests/test2.c -I includes/ -L . -lft_malloc
-	gcc -g -o test3 tests/test3.c -I includes/ -L . -lft -L./libft/ -lft_malloc
-	gcc -g -o test3bis tests/test3bis.c -I includes/ -L . -lft_malloc
+	gcc -o test3 tests/test3.c -I includes/ -L . -lft -L./libft/ -lft_malloc
+	gcc -o test3bis tests/test3bis.c -I includes/ -L . -lft_malloc
 	gcc -o test4 tests/test4.c -I includes/ -L . -lft_malloc
 	gcc -o test5 tests/test5.c -I includes/ -L . -lft_malloc
 	echo "Test generated\n"

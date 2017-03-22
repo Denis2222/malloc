@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/21 09:18:08 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/22 12:29:11 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void	getmapwords(t_map *map)
 		strcpy(keyword, "SMALL");
 	else if (map->type >= SMALL)
 		strcpy(keyword, "LARGE");
-	ft_printf("%s : %p (%d)\n", keyword, map, map->empty);
+	if (map->type > SMALL)
+		ft_printf("%s : %p (use:%d)\n",
+					keyword, map, !map->available);
+	else
+		ft_printf("%s : %p (use:%d)\n",
+					keyword, map, (BLOCK_MAX - map->available));
 }
 
 void	show_alloc_mem(void)
@@ -42,7 +47,7 @@ void	show_alloc_mem(void)
 		{
 			b = getblockbyid(current, i);
 			if (b->content != 0)
-				ft_printf("%p - %p : %d octets\n", b->ptr,
+				ft_printf("%p - %p : %lu octets\n", b->ptr,
 					b->ptr + b->content, b->content);
 			if (current->type > SMALL)
 				break ;
