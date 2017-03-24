@@ -6,16 +6,16 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 09:01:11 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 13:50:50 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 07:12:15 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int main()
+int	main(void)
 {
-	int i;
-	char *addr;
+	int		i;
+	char	*addr;
 
 	i = 0;
 	while (i < 1024)

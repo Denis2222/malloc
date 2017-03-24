@@ -6,14 +6,12 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 09:01:35 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/24 05:36:21 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 07:09:46 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <limits.h>
-//#include "malloc.h"
-
 
 int		main(void)
 {
@@ -21,7 +19,6 @@ int		main(void)
 	malloc(84);
 	malloc(3725);
 	malloc(48847);
-
 	malloc(99929194294967286);
 	show_alloc_mem();
 	return (0);

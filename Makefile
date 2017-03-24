@@ -6,7 +6,7 @@
 #    By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/19 15:18:49 by dmoureu-          #+#    #+#              #
-#    Updated: 2017/03/24 03:54:41 by dmoureu-         ###   ########.fr        #
+#    Updated: 2017/03/24 07:16:34 by dmoureu-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ fclean:		clean
 	fi
 	rm -rf $(NAMELINK)
 	rm -rf test
+
 	make -C libft/ fclean
 
 test:
@@ -90,6 +91,7 @@ test:
 	gcc -o test4 tests/test4.c -I includes/ -L . -lft_malloc -lft -L./libft/
 	gcc -o test5 tests/test5.c -I includes/ -L . -lft_malloc -lft -L./libft/
 	gcc -g -o test6 tests/test6.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	@rm libftmalloc.a
 	echo "Test generated\n"
 
 testdone:

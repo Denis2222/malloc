@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:20:49 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/24 05:44:31 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 06:58:26 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_map	*newmap(size_t size)
 	return (map);
 }
 
-bool	mapcanstore(t_map *map, size_t size)
+int		mapcanstore(t_map *map, size_t size)
 {
 	if (map->type == sizetype(size) && map->available > 0)
 		return (1);
