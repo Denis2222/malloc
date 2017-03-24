@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:25:23 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 10:07:34 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 03:28:24 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef enum { false, true } bool;
 
-#define TINY 1025
-#define SMALL 5000 //GETPAGESIZE
+#define TINY 1024
+#define SMALL 4096 //GETPAGESIZE
 
 #define BLOCK_MAX 100
 

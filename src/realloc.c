@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 17:40:37 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 22:19:36 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 06:15:34 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	*realloc(void *ptr, size_t size)
 	int		id;
 
 	if (size == 0 && ptr)
-	{
-		//free(ptr);
-		return (malloc(1024));
-	}
+		return (malloc(TINY));
 	if (!ptr)
 		return (malloc(size));
 	globalmap = staticmaps(NULL);
@@ -46,9 +43,8 @@ void	*realloc(void *ptr, size_t size)
 	if (!map)
 		return (malloc(size));
 	id = 0;
-	while (id < BLOCK_MAX)
+	while (id < BLOCK_MAX && (block = getblockbyid(map, id)))
 	{
-		block = getblockbyid(map, id);
 		if (block->ptr == ptr)
 			if ((ptr = reallocblock(map, block, size)))
 			{

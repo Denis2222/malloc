@@ -6,7 +6,7 @@
 #    By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/19 15:18:49 by dmoureu-          #+#    #+#              #
-#    Updated: 2017/03/22 13:54:19 by dmoureu-         ###   ########.fr        #
+#    Updated: 2017/03/24 03:54:41 by dmoureu-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,13 +82,14 @@ fclean:		clean
 
 test:
 	cp $(NAME) libftmalloc.a
-	gcc -o test0 tests/test0.c -I includes/ -L . -lft_malloc
-	gcc -o test1 tests/test1.c -I includes/ -L . -lft_malloc
-	gcc -o test2 tests/test2.c -I includes/ -L . -lft_malloc
-	gcc -o test3 tests/test3.c -I includes/ -L . -lft -L./libft/ -lft_malloc
-	gcc -o test3bis tests/test3bis.c -I includes/ -L . -lft_malloc
-	gcc -o test4 tests/test4.c -I includes/ -L . -lft_malloc
-	gcc -o test5 tests/test5.c -I includes/ -L . -lft_malloc
+	gcc -o test0 tests/test0.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -o test1 tests/test1.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -o test2 tests/test2.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -o test3 tests/test3.c -I includes/ -L . -lft -L./libft/ -lft_malloc -lft -L./libft/
+	gcc -o test3bis tests/test3bis.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -o test4 tests/test4.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -o test5 tests/test5.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -g -o test6 tests/test6.c -I includes/ -L . -lft_malloc -lft -L./libft/
 	echo "Test generated\n"
 
 testdone:

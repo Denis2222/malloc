@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:21:49 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 13:33:16 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/23 19:01:28 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ size_t	mapsize(size_t size)
 {
 	size_t	mapsize;
 
-	if (size < TINY)
+	if (size <= TINY)
 		mapsize = (SIZEMAP + (BLOCK_MAX * SIZEBLOCK) + (TINY * BLOCK_MAX));
-	else if (size >= TINY && size < SMALL)
+	else if (size > TINY && size <= SMALL)
 		mapsize = (SIZEMAP + (BLOCK_MAX * SIZEBLOCK) + (SMALL * BLOCK_MAX));
 	else
 		mapsize = (SIZEMAP + SIZEBLOCK + size);
@@ -42,9 +42,9 @@ size_t	mapsize(size_t size)
 
 size_t	sizetype(size_t size)
 {
-	if (size < TINY)
+	if (size <= TINY)
 		return (TINY);
-	else if (size >= TINY && size < SMALL)
+	else if (size > TINY && size <= SMALL)
 		return (SMALL);
 	else
 		return (size);

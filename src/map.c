@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:20:49 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 11:53:25 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 05:44:31 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ t_map	*newmap(size_t size)
 	t_map	*map;
 	void	*ptrmmap;
 
-	//printf("newmap(%lu)\n", size);
-	//ft_putstr("newmap(");ft_putnbr(size);ft_putstr(")\n");
 	ptrmmap = mmap(0, multiplepagesize(mapsize(size)),
 		PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	map = (t_map*)ptrmmap;
 	if (ptrmmap == MAP_FAILED)
 	{
+		ft_putstr("malloc() error unable to allocate ");
+		ft_putulongnbr(size);
+		ft_putstr(" octets\n");
 		return (NULL);
 	}
 	map->ptr = ptrmmap;

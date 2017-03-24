@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:22:56 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/22 14:24:44 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/24 06:12:32 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@ int		freemap(t_map *cmap, t_map *prev)
 {
 	if (prev)
 	{
-		if (cmap->available == BLOCK_MAX || (cmap->type > SMALL && cmap->available == 1))
+		if (cmap->available == BLOCK_MAX ||
+			(cmap->type > SMALL && cmap->available == 1))
 		{
 			prev->next = cmap->next;
-			munmap(cmap->ptr, cmap->type);
+			munmap(cmap->ptr, cmap->total);
 			return (1);
 		}
 	}
 	else
 	{
-		if (cmap->type > SMALL && cmap->available == 1)
+		if ((cmap->type > SMALL && cmap->available == 1) ||
+			cmap->available == BLOCK_MAX)
 		{
 			staticmaps(cmap->next);
-			munmap(cmap->ptr, cmap->type);
+			munmap(cmap->ptr, cmap->total);
 			return (1);
 		}
 	}
-  return (0);
+	return (0);
 }
 
 void	freeemptymap(t_map *gmap)
@@ -40,30 +42,21 @@ void	freeemptymap(t_map *gmap)
 	t_map	*map;
 	t_map	*prev;
 	t_map	*next;
-	int		tiny;
-	int		small;
+	int		two[2];
 
 	map = gmap;
 	prev = NULL;
-	tiny = 0;
-	small = 0;
+	two[0] = 0;
+	two[1] = 0;
 	while (map)
 	{
 		next = map->next;
 		if (map->type == TINY)
-		{
-			tiny++;
-			if (tiny > 1)
-				if (freemap(map, prev))
-					map = NULL;
-		}
+			if (two[0]++ > 1 && freemap(map, prev))
+				map = NULL;
 		if (map && map->type == SMALL)
-		{
-			small++;
-			if (small > 1)
-				if (freemap(map, prev))
-					map = NULL;
-		}
+			if (two[1]++ > 1 && freemap(map, prev))
+				map = NULL;
 		if (map && map->type > SMALL)
 			if (freemap(map, prev))
 				map = NULL;
@@ -86,7 +79,6 @@ void	free(void *ptrblock)
 	t_block	*block;
 	int		id;
 
-	ft_putstr("F");
 	if (ptrblock == NULL)
 		return ;
 	globalmap = staticmaps(NULL);

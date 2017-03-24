@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2.c                                            :+:      :+:    :+:   */
+/*   test6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/22 09:01:16 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/23 23:57:04 by dmoureu-         ###   ########.fr       */
+/*   Created: 2017/03/22 09:01:35 by dmoureu-          #+#    #+#             */
+/*   Updated: 2017/03/24 05:36:21 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "malloc.h"
+#include <limits.h>
+//#include "malloc.h"
 
-int main()
+
+int		main(void)
 {
-	int i;
-	char *addr;
+	malloc(42);
+	malloc(84);
+	malloc(3725);
+	malloc(48847);
 
-	i = 0;
-	while (i < 3)
-	{
-		addr = (char*)malloc(1024);
-		addr[0] = 42;
-		//if (i < 1020)
-			free(addr);
-		i++;
-	}
-
-	//ft_putptr(addr);
- 	show_alloc_mem();
+	malloc(99929194294967286);
+	show_alloc_mem();
 	return (0);
 }
