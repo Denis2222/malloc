@@ -6,7 +6,7 @@
 #    By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/19 15:18:49 by dmoureu-          #+#    #+#              #
-#    Updated: 2017/03/24 07:16:34 by dmoureu-         ###   ########.fr        #
+#    Updated: 2017/03/26 18:37:02 by dmoureu-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ test:
 	gcc -o test3bis tests/test3bis.c -I includes/ -L . -lft_malloc -lft -L./libft/
 	gcc -o test4 tests/test4.c -I includes/ -L . -lft_malloc -lft -L./libft/
 	gcc -o test5 tests/test5.c -I includes/ -L . -lft_malloc -lft -L./libft/
-	gcc -g -o test6 tests/test6.c -I includes/ -L . -lft_malloc -lft -L./libft/
+	gcc -o test6 tests/test6.c -I includes/ -L . -lft_malloc -lft -L./libft/
 	@rm libftmalloc.a
 	echo "Test generated\n"
 

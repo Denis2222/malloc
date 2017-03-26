@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:22:56 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/24 06:12:32 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:54:38 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		freemap(t_map *cmap, t_map *prev)
 {
+	pthread_mutex_lock(&g_lock);
 	if (prev)
 	{
 		if (cmap->available == BLOCK_MAX ||
@@ -21,6 +22,7 @@ int		freemap(t_map *cmap, t_map *prev)
 		{
 			prev->next = cmap->next;
 			munmap(cmap->ptr, cmap->total);
+			pthread_mutex_unlock(&g_lock);
 			return (1);
 		}
 	}
@@ -31,9 +33,11 @@ int		freemap(t_map *cmap, t_map *prev)
 		{
 			staticmaps(cmap->next);
 			munmap(cmap->ptr, cmap->total);
+			pthread_mutex_unlock(&g_lock);
 			return (1);
 		}
 	}
+	pthread_mutex_unlock(&g_lock);
 	return (0);
 }
 

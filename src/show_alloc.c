@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 14:24:14 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/24 07:12:45 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/26 19:12:18 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void	show_alloc_mem(void)
 	total = 0;
 	maps = staticmaps(NULL);
 	current = maps;
+	pthread_mutex_lock(&g_lock);
 	show_alloc_mem_block(current, &content, &total);
+	pthread_mutex_unlock(&g_lock);
 	ft_putstr("Total : ");
 	ft_putulongnbr(content);
 	ft_putstr(" octets");

@@ -6,7 +6,7 @@
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 17:40:37 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/03/24 06:15:34 by dmoureu-         ###   ########.fr       */
+/*   Updated: 2017/03/26 18:54:51 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	*reallocblock(t_map *map, t_block *block, size_t size)
 		return (block->ptr);
 	}
 	ptr = malloc(size);
+	pthread_mutex_lock(&g_lock);
 	ft_memcpy(ptr, block->ptr, block->content);
 	freemyblock(map, block);
+	pthread_mutex_unlock(&g_lock);
 	return (ptr);
 }
 
@@ -43,15 +45,12 @@ void	*realloc(void *ptr, size_t size)
 	if (!map)
 		return (malloc(size));
 	id = 0;
-	while (id < BLOCK_MAX && (block = getblockbyid(map, id)))
-	{
+	while (id < BLOCK_MAX && (block = getblockbyid(map, id++)))
 		if (block->ptr == ptr)
 			if ((ptr = reallocblock(map, block, size)))
 			{
 				freeemptymap(globalmap);
 				return (ptr);
 			}
-		id++;
-	}
 	return (NULL);
 }
