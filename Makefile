@@ -6,7 +6,7 @@
 #    By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/19 15:18:49 by dmoureu-          #+#    #+#              #
-#    Updated: 2017/03/26 18:37:02 by dmoureu-         ###   ########.fr        #
+#    Updated: 2017/03/26 19:24:29 by dmoureu-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,8 +77,6 @@ fclean:		clean
 		printf "\r";														\
 	fi
 	rm -rf $(NAMELINK)
-	rm -rf test
-
 	make -C libft/ fclean
 
 test:
