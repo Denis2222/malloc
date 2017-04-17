@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc.c                                           :+:      :+:    :+:   */
+/*   test6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmoureu- <dmoureu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/19 14:18:17 by dmoureu-          #+#    #+#             */
-/*   Updated: 2017/04/17 16:44:58 by dmoureu-         ###   ########.fr       */
+/*   Created: 2017/03/22 09:01:35 by dmoureu-          #+#    #+#             */
+/*   Updated: 2017/04/17 17:10:46 by dmoureu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <limits.h>
 #include "malloc.h"
 
-void	*malloc(size_t size)
+int		main(void)
 {
-	return (getmemory(size));
-}
 
-void	*getmemory(size_t size)
-{
-	t_map	*maps;
-	t_map	*mapavailable;
-	void	*ptr;
+	srand(time(0));
 
-	if (!(maps = staticmaps(NULL)))
+	int i;
+	for (i=0; i<5; i++)
 	{
-		maps = staticmaps(newmap(size));
+		malloc((rand()%1024));
 	}
-	pthread_mutex_lock(&g_lock);
-	mapavailable = getmapavailable(maps, size);
-	if (mapavailable)
-		ptr = mapstore(mapavailable, size);
-	else
-		ptr = NULL;
-	pthread_mutex_unlock(&g_lock);
-	return (ptr);
+	for (i=0; i<10; i++)
+	{
+		malloc((rand()%4096));
+	}
+	for (i=0; i<5; i++)
+	{
+		malloc((rand()%999999));
+	}
+
+	show_alloc_mem();
+	malloc(199999999999999);
+	return (0);
 }
