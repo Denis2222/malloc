@@ -101,7 +101,7 @@ SRCS = put/ft_putchar.c \
 
 LIBA = libft.a
 NAME = $(LIBA)
-GCC_FLAGS = -Wall -Werror -Wextra
+GCC_FLAGS = -Wall -Werror -Wextra -fPIC
 CC = gcc $(GCC_FLAGS)
 SRCDIR = ./
 OBJDIR = ./
