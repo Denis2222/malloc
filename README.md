@@ -50,5 +50,5 @@ can be ~slow for 100 zone of 1000 octets. (because 100 syscall)
 
 malloc can prevent a huge call number to syscall.
 
-t_map represent an mmap region ( can contain 100 * TINY or 100 * SMALL or 1 * >SMALL)
+t_map represent an mmap region ( can contain 100 * TINY or 100 * SMALL or 1 * >SMALL).
 t_block represent a malloc(x) memory zone of size (x) (type TINY or type SMALL or Bigger).
