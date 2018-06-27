@@ -50,9 +50,13 @@ can be ~slow for 100 zone of 1000 octets. (because 100 syscall)
 
 malloc can prevent a huge call number to syscall.
 
-t_map (Linked lists) represent an mmap region.
-        contain :   100 * (TINY t_block) or.
-                    100 * (SMALL t_block) or. 
-                    1 * (>SMALL t_block)).
+t_map (Linked lists) represent an mmap region
+
+        contain :   100 * (TINY t_block) or
+        
+                    100 * (SMALL t_block) or
+                    
+                    1 * (>SMALL t_block))
+
 
 t_block represent a malloc(x) memory zone of size (x) (type TINY or type SMALL or Bigger).
